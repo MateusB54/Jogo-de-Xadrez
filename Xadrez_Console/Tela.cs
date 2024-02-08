@@ -1,9 +1,10 @@
 ﻿using System;
 using tabuleiro;
+using xadrez;
 
 namespace Xadrez_Console
 {
-    internal class Tela
+    class Tela
     {
         public static void imprimirTabuleiro(Tabuleiro tab)
         {
@@ -27,6 +28,16 @@ namespace Xadrez_Console
             }
             Console.WriteLine("  A B C D E F G H");
         }
+
+        public static PosicaoXadrez lerPosicaoXadrez()
+        {
+            string s = Console.ReadLine();
+            char Coluna = s[0];
+            int Linha = int.Parse (s[1]+ "");
+            return new PosicaoXadrez (Coluna, Linha);
+
+        }
+
        
         public static void imprimirPeca(Peca peca)
         {

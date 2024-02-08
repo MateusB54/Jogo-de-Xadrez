@@ -1,6 +1,6 @@
 ﻿namespace tabuleiro
 {
-    internal class Peca
+    class Peca
     {
         public Posicao Posicao { get; set; }
         public Cor Cor { get; protected set; }
@@ -13,6 +13,11 @@
             Cor = cor;
             Tab = tab;
             QtdMovimentos= 0;
+        }
+
+        public void incrementarQtdMovimentos ()
+        {
+            QtdMovimentos++;
         }
 
     }
