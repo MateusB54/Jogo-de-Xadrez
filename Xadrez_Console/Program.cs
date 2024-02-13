@@ -12,24 +12,40 @@ namespace Xadrez_Console
             {
                 PartidaDeXadrez partida = new PartidaDeXadrez();
 
+
                 while (!partida.Terminada)
                 {
-                    Console.Clear();
-                    Tela.imprimirTabuleiro(partida.Tab);
+                    try {
+                        Console.Clear();
+                        Tela.imprimirTabuleiro(partida.Tab);
+                        Console.WriteLine();
+                        Console.WriteLine("Turno: " + partida.Turno);
+                        Console.WriteLine("Aguardando jogada: " + partida.JogadorAtual);
 
-                    Console.WriteLine();
-                    Console.Write("Origem: ");
-                    Posicao Origem = Tela.lerPosicaoXadrez().toPosicao();
+                        Console.WriteLine();
+                        Console.Write("Posição da peça: ");
+                        Posicao Origem = Tela.lerPosicaoXadrez().toPosicao();
+                        partida.validarPosicaoDeOrigem(Origem);
 
-                    bool[,] posicoesPossiveis =partida.Tab.peca(Origem).movimentosPossiveis();
 
-                    Console.Clear() ;
-                    Tela.imprimirTabuleiro(partida.Tab, posicoesPossiveis) ;
+                        bool[,] posicoesPossiveis = partida.Tab.peca(Origem).movimentosPossiveis();
 
-                    Console.WriteLine();
-                    Console.Write("Destino: ");
-                    Posicao Destino = Tela.lerPosicaoXadrez().toPosicao();
-                    partida.executarMovimento (Origem, Destino);
+                        Console.Clear();
+                        Tela.imprimirTabuleiro(partida.Tab, posicoesPossiveis);
+
+                        Console.WriteLine();
+                        Console.Write("Posição de destino: ");
+                        Posicao Destino = Tela.lerPosicaoXadrez().toPosicao();
+                        partida.validarPosicaoDeDestino(Origem, Destino);
+                        partida.realizaJogada(Origem, Destino);
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                        Console.ReadLine();
+                    }
+
 
 
                 }
